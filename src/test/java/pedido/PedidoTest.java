@@ -8,15 +8,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import produto.Shake;
 import produto.TipoTamanho;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class PedidoTest{
+class PedidoTest{
 
     Pedido pedido;
     Cardapio cardapio;
@@ -87,7 +85,7 @@ public class PedidoTest{
             assertEquals(new Base(TipoBase.Sorvete), item.getShake().getBase());
             assertEquals(new Fruta(TipoFruta.Morango), item.getShake().getFruta());
             assertEquals(new Topping(TipoTopping.Mel), item.getShake().getTopping());
-            assertEquals(null, item.getShake().getAdicionais());
+            assertEquals(new ArrayList<>(), item.getShake().getAdicionais());
             assertEquals(TipoTamanho.P, item.getShake().getTipoTamanho());
             assertEquals(3, item.getQuantidade());
         });
@@ -263,5 +261,4 @@ public class PedidoTest{
 
         assertEquals(25, pedido.calcularTotal(cardapio));
     }
-
 }

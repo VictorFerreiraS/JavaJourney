@@ -6,13 +6,11 @@ import ingredientes.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
-
 import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class CardapioTest {
+class CardapioTest {
 
     Cardapio cardapio;
 
@@ -201,5 +199,4 @@ public class CardapioTest {
             assertEquals(IngredientesNotFound.class, e.getClass());
         }
     }
-
 }

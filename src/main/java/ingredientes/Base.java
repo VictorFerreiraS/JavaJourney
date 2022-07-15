@@ -4,9 +4,9 @@ import java.util.Objects;
 
 public class Base implements Ingrediente,Comparable<Ingrediente>{
 
-    private TipoBase tipoBase;
+    private final TipoBase tipoBase;
 
-    public Base(TipoBase tipoBase) {
+    public Base(final TipoBase tipoBase) {
         this.tipoBase = tipoBase;
     }
 
@@ -15,7 +15,7 @@ public class Base implements Ingrediente,Comparable<Ingrediente>{
     }
 
     @Override
-    public int compareTo(Ingrediente ingrediente) {
+    public int compareTo(final Ingrediente ingrediente) {
         return this.obterTipo().toString().compareToIgnoreCase(ingrediente.obterTipo().toString());
     }
 

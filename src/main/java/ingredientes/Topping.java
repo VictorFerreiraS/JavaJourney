@@ -1,9 +1,9 @@
 package ingredientes;
 
 public class Topping implements Adicional,Comparable<Ingrediente> {
-    private TipoTopping tipoTopping;
+    private final TipoTopping tipoTopping;
 
-    public Topping(TipoTopping tipoTopping) {
+    public Topping(final TipoTopping tipoTopping) {
         this.tipoTopping = tipoTopping;
     }
 
@@ -12,7 +12,7 @@ public class Topping implements Adicional,Comparable<Ingrediente> {
     }
 
     @Override
-    public int compareTo(Ingrediente ingrediente) {
+    public int compareTo(final Ingrediente ingrediente) {
         return this.obterTipo().toString().compareTo(ingrediente.obterTipo().toString());
     }
 
@@ -20,9 +20,7 @@ public class Topping implements Adicional,Comparable<Ingrediente> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Topping)) return false;
-
         Topping topping = (Topping) o;
-
         return tipoTopping == topping.tipoTopping;
     }
 

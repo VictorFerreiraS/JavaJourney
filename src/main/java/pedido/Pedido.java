@@ -5,9 +5,9 @@ import java.util.*;
 
 public class Pedido{
 
-    private int id;
-    private  ArrayList<ItemPedido> itens;
-    private Cliente cliente;
+    private final int id;
+    private final ArrayList<ItemPedido> itens;
+    private final Cliente cliente;
 
     public Pedido(int id, ArrayList<ItemPedido> itens,Cliente cliente){
         this.id = id;
@@ -27,7 +27,7 @@ public class Pedido{
         return this.cliente;
     }
 
-    public double calcularTotal(Cardapio cardapio) {
+    public double calcularTotal(final Cardapio cardapio) {
         return itens.stream()
                 .map(itemPedido -> {
                     final var shake = itemPedido.getShake();
@@ -36,13 +36,13 @@ public class Pedido{
                     if (shake.getAdicionais() != null) {
                         precoAdicionais = shake.getAdicionais().stream().map(cardapio::buscarPreco).mapToDouble(v -> v).sum();
                     }
-                    final var acrescimo = shake.getTipoTamanho().multiplicador * precoBase;
-                    return (precoBase + acrescimo + precoAdicionais) * itemPedido.getQuantidade();
+                    final var acrescimoBase = shake.getTipoTamanho().multiplicador * precoBase;
+                    return (precoBase + acrescimoBase + precoAdicionais) * itemPedido.getQuantidade();
                 })
                 .reduce(0.0, Double::sum);
     }
 
-    public void adicionarItemPedido(ItemPedido itemPedidoAdicionado){
+    public void adicionarItemPedido(final ItemPedido itemPedidoAdicionado){
         for (ItemPedido itemPedido : itens) {
             if (itemPedido.getShake() == itemPedidoAdicionado.getShake()){
                 itemPedido.setQuantidade(itemPedidoAdicionado.getQuantidade() + itemPedido.getQuantidade());
@@ -56,7 +56,7 @@ public class Pedido{
        itens.add(itemPedidoAdicionado);
     }
 
-    public void removeItemPedido(ItemPedido itemPedidoRemovido) {
+    public void removeItemPedido(final ItemPedido itemPedidoRemovido) {
         for (ItemPedido itemPedido : itens) {
             var shakeItem = itemPedido.getShake();
             var shakeRemover = itemPedidoRemovido.getShake();
