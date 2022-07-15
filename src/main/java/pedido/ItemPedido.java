@@ -1,6 +1,8 @@
 package pedido;
 
+import ingredientes.Topping;
 import produto.Shake;
+import java.util.Objects;
 
 public class ItemPedido {
     private Shake shake;
@@ -26,5 +28,19 @@ public class ItemPedido {
     @Override
     public String toString() {
         return this.shake + " / x" + this.quantidade;
+    }
+
+    @Override
+
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ItemPedido that = (ItemPedido) o;
+        return shake.equals(that.shake);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(shake);
     }
 }

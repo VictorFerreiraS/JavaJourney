@@ -1,5 +1,6 @@
 package pedido;
 
+import exception.ItemNotFound;
 import ingredientes.*;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -86,7 +87,7 @@ public class PedidoTest{
             assertEquals(new Base(TipoBase.Sorvete), item.getShake().getBase());
             assertEquals(new Fruta(TipoFruta.Morango), item.getShake().getFruta());
             assertEquals(new Topping(TipoTopping.Mel), item.getShake().getTopping());
-            assertEquals(new ArrayList<>(), item.getShake().getAdicionais());
+            assertEquals(null, item.getShake().getAdicionais());
             assertEquals(TipoTamanho.P, item.getShake().getTipoTamanho());
             assertEquals(3, item.getQuantidade());
         });
@@ -174,7 +175,7 @@ public class PedidoTest{
         Shake shakeRemovido = new Shake(new Base(TipoBase.Sorvete),
                 new Fruta(TipoFruta.Morango),
                 new Topping(TipoTopping.Mel),
-                new ArrayList<>(List.of(new Topping(TipoTopping.Aveia), new Fruta(TipoFruta.Banana))),
+                new ArrayList<>(List.of(new Fruta(TipoFruta.Banana), new Topping(TipoTopping.Aveia))),
                 TipoTamanho.P
         );
 
@@ -213,7 +214,7 @@ public class PedidoTest{
             fail("Excecao nao encontrada.");
         }catch(Throwable e){
             assertEquals("Item nao existe no pedido.", e.getMessage());
-            assertEquals(IllegalArgumentException.class, e.getClass());
+            assertEquals(ItemNotFound.class, e.getClass());
         }
     }
 
