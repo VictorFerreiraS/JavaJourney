@@ -6,7 +6,7 @@ public class Base implements Ingrediente,Comparable<Ingrediente>{
 
     private final TipoBase tipoBase;
 
-    public Base(final TipoBase tipoBase) {
+    public Base(TipoBase tipoBase) {
         this.tipoBase = tipoBase;
     }
 
@@ -15,7 +15,7 @@ public class Base implements Ingrediente,Comparable<Ingrediente>{
     }
 
     @Override
-    public int compareTo(final Ingrediente ingrediente) {
+    public int compareTo(Ingrediente ingrediente) {
         return this.obterTipo().toString().compareToIgnoreCase(ingrediente.obterTipo().toString());
     }
 

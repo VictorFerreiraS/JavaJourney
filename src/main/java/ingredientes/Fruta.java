@@ -2,15 +2,15 @@ package ingredientes;
 
 public class Fruta implements Adicional,Comparable<Ingrediente>{
      private final TipoFruta tipoFruta;
-     public Fruta(final TipoFruta tipoFruta) {
+     public Fruta(TipoFruta tipoFruta) {
           this.tipoFruta = tipoFruta;
      }
-     public final TipoFruta getTipoFruta(){
+     public TipoFruta getTipoFruta(){
           return this.tipoFruta;
      }
 
      @Override
-     public int compareTo(final Ingrediente ingrediente) {
+     public int compareTo(Ingrediente ingrediente) {
           return this.obterTipo().toString().compareTo(ingrediente.obterTipo().toString());
      }
 

@@ -16,34 +16,31 @@ public class Cardapio {
         return this.precos;
     }
 
-    public void adicionarIngrediente(final Ingrediente ingrediente,final Double preco){
+    public void adicionarIngrediente(final Ingrediente ingrediente,final Double preco) throws PrecoInvalid{
         validarPreco(preco);
         precos.put(ingrediente,preco);
     }
 
-    public void atualizarIngrediente(final Ingrediente ingrediente,final Double preco){
+    public void atualizarIngrediente(final Ingrediente ingrediente,final Double preco) throws PrecoInvalid, IngredientesNotFound{
         validarPreco(preco);
-        if (precos.containsKey(ingrediente))
-            precos.replace(ingrediente, buscarPreco(ingrediente), preco);
-        else
+        final var ingredienteExiste =  precos.replace(ingrediente, buscarPreco(ingrediente), preco);
+        if (!ingredienteExiste)
             throw new IngredientesNotFound();
     }
 
-    public void removerIngrediente(final Ingrediente ingrediente) {
-        if (precos.containsKey(ingrediente))
-            precos.remove(ingrediente);
-        else
+    public void removerIngrediente(final Ingrediente ingrediente) throws IngredientesNotFound{
+        final var ingredienteExiste =  precos.remove(ingrediente, buscarPreco(ingrediente));
+        if (!ingredienteExiste)
             throw new IngredientesNotFound();
     }
 
-    public Double buscarPreco(final Ingrediente ingrediente){
+    public Double buscarPreco(final Ingrediente ingrediente) throws IngredientesNotFound{
         if (precos.containsKey(ingrediente))
             return precos.get(ingrediente);
-        else
-            throw new IngredientesNotFound();
+        throw new IngredientesNotFound();
     }
 
-    private void validarPreco(final Double preco) {
+    private void validarPreco(final Double preco) throws PrecoInvalid{
         if (preco <= 0)
             throw new PrecoInvalid();
     }

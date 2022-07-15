@@ -7,7 +7,7 @@ public class ItemPedido {
     private final Shake shake;
     private int quantidade;
 
-    public ItemPedido(final Shake shake,final int quantidade) {
+    public ItemPedido(Shake shake, int quantidade) {
         this.shake = shake;
         this.quantidade = quantidade;
     }

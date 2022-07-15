@@ -8,7 +8,7 @@ public class Shake {
     private final Base base;
     private final Fruta fruta;
     private final Topping topping;
-    private List<Adicional> adicionais;
+    private final List<Adicional> adicionais;
     private final TipoTamanho  tipoTamanho;
 
     public Shake(Base base, Fruta fruta, Topping topping, TipoTamanho tipoTamanho) {

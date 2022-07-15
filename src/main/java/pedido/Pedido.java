@@ -31,11 +31,9 @@ public class Pedido{
         return itens.stream()
                 .map(itemPedido -> {
                     final var shake = itemPedido.getShake();
+                    final var adiocinais = shake.getAdicionais();
                     final var precoBase = cardapio.buscarPreco(shake.getBase());
-                    Double precoAdicionais = 0.0;
-                    if (shake.getAdicionais() != null) {
-                        precoAdicionais = shake.getAdicionais().stream().map(cardapio::buscarPreco).mapToDouble(v -> v).sum();
-                    }
+                    final var precoAdicionais = adiocinais.stream().map(cardapio::buscarPreco).reduce(0.0, Double::sum);
                     final var acrescimoBase = shake.getTipoTamanho().multiplicador * precoBase;
                     return (precoBase + acrescimoBase + precoAdicionais) * itemPedido.getQuantidade();
                 })
@@ -56,7 +54,7 @@ public class Pedido{
        itens.add(itemPedidoAdicionado);
     }
 
-    public void removeItemPedido(final ItemPedido itemPedidoRemovido) {
+    public void removeItemPedido(final ItemPedido itemPedidoRemovido) throws ItemNotFound {
         for (ItemPedido itemPedido : itens) {
             var shakeItem = itemPedido.getShake();
             var shakeRemover = itemPedidoRemovido.getShake();
