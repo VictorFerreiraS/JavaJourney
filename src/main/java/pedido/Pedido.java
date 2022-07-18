@@ -41,33 +41,26 @@ public class Pedido{
     }
 
     public void adicionarItemPedido(final ItemPedido itemPedidoAdicionado){
-        for (ItemPedido itemPedido : itens) {
-            if (itemPedido.getShake() == itemPedidoAdicionado.getShake()){
-                itemPedido.setQuantidade(itemPedidoAdicionado.getQuantidade() + itemPedido.getQuantidade());
-                return;
-            }
-            else {
-                itens.add(itemPedidoAdicionado);
-                return;
-            }
+        var shakeIndex = itens.indexOf(itemPedidoAdicionado);
+
+        if (shakeIndex != -1) {
+            var shake = itens.get(shakeIndex);
+            shake.setQuantidade(itemPedidoAdicionado.getQuantidade() + shake.getQuantidade());
         }
-       itens.add(itemPedidoAdicionado);
+        else
+            itens.add(itemPedidoAdicionado);
     }
 
     public void removeItemPedido(final ItemPedido itemPedidoRemovido) throws ItemNotFound {
-        for (ItemPedido itemPedido : itens) {
-            var shakeItem = itemPedido.getShake();
-            var shakeRemover = itemPedidoRemovido.getShake();
-            if (shakeItem.equals(shakeRemover)){
-                if (itemPedido.getQuantidade() == 1) {
-                    itens.remove(itemPedidoRemovido);
-                    return;
-                }
-                else {
-                    itemPedido.setQuantidade(itemPedido.getQuantidade() - 1);
-                    return;
-                }
-            }
+        var shakeIndex = itens.indexOf(itemPedidoRemovido);
+
+        if (shakeIndex != -1) {
+            var shake = itens.get(shakeIndex);
+            if (shake.getQuantidade() == 1)
+                itens.remove(itemPedidoRemovido);
+            else
+                shake.setQuantidade(shake.getQuantidade() - 1);
+            return;
         }
         throw new ItemNotFound();
     }
